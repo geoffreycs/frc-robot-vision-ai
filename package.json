@@ -1,0 +1,16 @@
+{
+  "name": "frc-robot-ai",
+  "version": "1.0.0",
+  "description": "Detects the yellow balls and provides targeting to the roboRIO via NetworkTables",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Geoffrey C Stentiford",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^1.5.2",
+    "node-webcam": "^0.5.0",
+    "wpilib-nt-client": "^1.7.1"
+  }
+}
