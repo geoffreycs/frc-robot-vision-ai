@@ -256,12 +256,13 @@ async function mainLoop(startState) {
                     closest_X = cartesian_converted[closest].X; //Grab the X-axis value of this ball's centerpoint
                     if (closest_X > 75) { //Turn right if it's on the right of the picture
                         console.log("Turn right");
-                        client.Assign("/coprocessor/right", turn);
+                        client.Assign("/coprocessor/turn", "right");
                     } else if (closest_X < -75) {
                         console.log("Turn left"); //Ditto but for left
-                        client.Assign("/coprocessor/left", turn);
+                        client.Assign("/coprocessor/turn", "left");
                     } else {
-                        console.log("Ahead"); //Or just go forwards if it's roughly centered
+                        client.Assign("/coprocessor/turn", "ahead"); //Or just go forwards if it's roughly centered
+                        console.log("Ahead");
                     }
                     console.log("last_X = " + String(last_X));
                     console.log("closest_X = " + String(closest_X));
@@ -287,10 +288,10 @@ async function mainLoop(startState) {
                         }
                         if (track > 0) { //Use the last known motion-tracking valuie to determine where to go
                             console.log("Turn right");
-                            client.Assign("/coprocessor/right", turn);
+                            client.Assign("/coprocessor/turn", "right");
                         } else if (track < 0) {
                             console.log("Turn left");
-                            client.Assign("/coprocessor/left", turn);
+                            client.Assign("/coprocessor/turn", "left");
                         }
                     }
                 }
