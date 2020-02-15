@@ -220,7 +220,7 @@ async function mainLoop(startState) {
     var running = true;
     model = await tf.loadGraphModel('file://model/model.json'); //Load the re-trained COCO RCNN v2 model
     console.log("Connection state at loop begin is " + String(startState));
-    var keyID = Number(client.getKeyID("shutdown")); //Grab the NetworkTables ID of the shutdown key
+    var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
     while (running == true) { //Loops through this block until the shutdown signal is sent
         try {
             if (client.getEntry(keyID) == true) { //Listen for when that shutdown entry switches to true
@@ -256,10 +256,10 @@ async function mainLoop(startState) {
                     closest_X = cartesian_converted[closest].X; //Grab the X-axis value of this ball's centerpoint
                     if (closest_X > 75) { //Turn right if it's on the right of the picture
                         console.log("Turn right");
-                        client.Assign("right", turn);
+                        client.Assign("/coprocessor/right", turn);
                     } else if (closest_X < -75) {
                         console.log("Turn left"); //Ditto but for left
-                        client.Assign("left", turn);
+                        client.Assign("/coprocessor/left", turn);
                     } else {
                         console.log("Ahead"); //Or just go forwards if it's roughly centered
                     }
@@ -287,10 +287,10 @@ async function mainLoop(startState) {
                         }
                         if (track > 0) { //Use the last known motion-tracking valuie to determine where to go
                             console.log("Turn right");
-                            client.Assign("right", turn);
+                            client.Assign("/coprocessor/right", turn);
                         } else if (track < 0) {
                             console.log("Turn left");
-                            client.Assign("left", turn);
+                            client.Assign("/coprocessor/left", turn);
                         }
                     }
                 }
