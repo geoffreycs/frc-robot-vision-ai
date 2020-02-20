@@ -1,5 +1,8 @@
 "use strict"; //Because of course we are
 
+//Change your bot's IP or hostname here
+const ip_address="169.254.106.59"
+
 //Set up the webcam
 let NodeCam = require("node-webcam");
 let cam_opts = {
@@ -20,7 +23,7 @@ var model;
 
 //Load the NetworkTables client
 const ntClient = require('wpilib-nt-client');
-const client = new ntClient.Client()
+const client = new ntClient.Client();
 
 //Pre-reserve some variables
 var data = new Buffer(""); //Where the JPEG image will first go
@@ -220,12 +223,12 @@ async function mainLoop(startState) {
     var running = true;
     model = await tf.loadGraphModel('file://model/model.json'); //Load the re-trained COCO RCNN v2 model
     console.log("Connection state at loop begin is " + String(startState));
-    var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
-    while (running == true) { //Loops through this block until the shutdown signal is sent
+    //var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
+    while (true) { //Loops through this block until the shutdown signal is sent
         try {
-            if (client.getEntry(keyID) == true) { //Listen for when that shutdown entry switches to true
+            /* if (client.getEntry(keyID) == true) { //Listen for when that shutdown entry switches to true
                 running = false; //And disable the loop so the function finally exits
-            }
+            } */
             data = await new Promise((resolve, reject) => {
                 Webcam.capture("image", function (err, data) { //Take the picture
                     if (err) { //Note an error if it occurs
@@ -256,12 +259,12 @@ async function mainLoop(startState) {
                     closest_X = cartesian_converted[closest].X; //Grab the X-axis value of this ball's centerpoint
                     if (closest_X > 75) { //Turn right if it's on the right of the picture
                         console.log("Turn right");
-                        client.Assign("/coprocessor/turn", "right");
+                        client.Assign("right", "/coprocessor/turn");
                     } else if (closest_X < -75) {
                         console.log("Turn left"); //Ditto but for left
-                        client.Assign("/coprocessor/turn", "left");
+                        client.Assign("left", "/coprocessor/turn");
                     } else {
-                        client.Assign("/coprocessor/turn", "ahead"); //Or just go forwards if it's roughly centered
+                        client.Assign("ahead", "/coprocessor/turn"); //Or just go forwards if it's roughly centered
                         console.log("Ahead");
                     }
                     console.log("last_X = " + String(last_X));
@@ -288,10 +291,10 @@ async function mainLoop(startState) {
                         }
                         if (track > 0) { //Use the last known motion-tracking valuie to determine where to go
                             console.log("Turn right");
-                            client.Assign("/coprocessor/turn", "right");
+                            client.Assign("right", "/coprocessor/turn");
                         } else if (track < 0) {
                             console.log("Turn left");
-                            client.Assign("/coprocessor/turn", "left");
+                            client.Assign("left", "/coprocessor/turn");
                         }
                     }
                 }
@@ -313,7 +316,7 @@ client.start((isConnected, err) => {
             () => process.exit(0) //Be ready to shutdown the program when we get the signal
         ); //Start actual program loop
     }
-}, "10.70.64.2"); //Specify IP of NetworkTables server (the roboRIO)
+}, ip_address); //Specify IP of NetworkTables server (the roboRIO)
 
 //Written by Geoffrey C. Stentiford of Team Voltron, FRC #7064
 //https://github.com/geoffreycs/frc-robot-vision-ai

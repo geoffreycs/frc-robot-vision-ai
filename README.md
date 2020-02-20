@@ -16,5 +16,5 @@ of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86
 1. Clone this repo: `git clone https://github.com/geoffreycs/frc-robot-vision-ai`
 2. (optional) Switch `@tensorflow/tfjs-node` to `@tensorflow/tfjs-node-gpu` in `package.json`
 3. Do `npm install`
-4. Edit `main.js` and set the right robot hostname or IP address in the bottom of the file
+4. Edit `main.js` and set the right robot hostname or IP address in the top of the file
 5. Set up some method to auto-run `node main.js` when needed
