@@ -19,13 +19,12 @@ let Webcam = NodeCam.create(cam_opts);
 
 //Load Tensorflow.JS
 let tf = require('@tensorflow/tfjs-node');
+tf.enableProdMode();
 var model;
 
-/*
 //Load the NetworkTables client
 const ntClient = require('wpilib-nt-client');
 const client = new ntClient.Client();
-*/
 
 //Pre-reserve some variables
 var data = new Buffer(""); //Where the JPEG image will first go
@@ -222,7 +221,7 @@ let findClosest = new ClosestBall({
 
 //Meat of the script
 async function mainLoop(startState) {
-    var running = true;
+    //var running = true;
     model = await tf.loadGraphModel('file://model/model.json'); //Load the re-trained COCO RCNN v2 model
     console.log("Connection state at loop begin is " + String(startState));
     //var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
