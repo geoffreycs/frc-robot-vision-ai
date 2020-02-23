@@ -1,7 +1,7 @@
 "use strict"; //Because of course we are
 
 //Change your bot's IP or hostname here
-const ip_address="169.254.106.59"
+//const ip_address = "169.254.106.59"
 
 //Set up the webcam
 let NodeCam = require("node-webcam");
@@ -10,7 +10,7 @@ let cam_opts = {
     height: 480,
     quality: 70, //Neural network doesn't need that great of a pciture
     saveShots: false, //No need to waste memory by saving
-    output: "jpeg", //Format must be JPEG
+    output: "png", //Format must be JPEG
     device: false, //Use default (only) camera
     callbackReturn: "buffer", //Return as a buffer so we can work with it immediately
     verbose: true //More logging is better
@@ -18,8 +18,34 @@ let cam_opts = {
 let Webcam = NodeCam.create(cam_opts);
 
 //Load Tensorflow.JS
-let tf = require('@tensorflow/tfjs-node');
+let tf = require('@tensorflow/tfjs');
 var model;
+
+//Set up stuff for using GPU processing
+//All of this shit is highly experimental
+//Stolen from https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-nodegl/src/index.ts
+const nodeGles = require('node-gles');
+const nodeGl = nodeGles.createWebGLRenderingContext();
+tf.env().set('WEBGL_VERSION', 2);
+tf.env().set('WEBGL_RENDER_FLOAT32_ENABLED', true);
+tf.env().set('WEBGL_DOWNLOAD_FLOAT_ENABLED', true);
+tf.env().set('WEBGL_FENCE_API_ENABLED', true); // OpenGL ES 3.0 and higher..
+tf.env().set(
+    'WEBGL_MAX_TEXTURE_SIZE', nodeGl.getParameter(nodeGl.MAX_TEXTURE_SIZE));
+tf.webgl.setWebGLContext(2, nodeGl);
+
+tf.registerBackend('headless-nodegl', () => {
+    // TODO(kreeger): Consider moving all GL creation here. However, weak-ref to
+    // GL context tends to cause an issue when running unit tests:
+    // https://github.com/tensorflow/tfjs/issues/1732
+    return new tf.webgl.MathBackendWebGL(new tf.webgl.GPGPUContext(nodeGl));
+}, 3 /* priority */ );
+
+//Load HTML5 canvas shims
+const {
+    createCanvas,
+    Image
+} = require('canvas');
 
 /*
 //Load the NetworkTables client
@@ -45,6 +71,8 @@ var last_X = null;
 var track = 0 | 0;
 var blank_count = 0;
 var closest_X = 0.0;
+var canvas = createCanvas(cam_opts.width, cam_opts.height);
+var ctx = canvas.getContext('2d');
 
 //Compile some asm.js modules for even more speed
 function CenterPoint(stdlib, foreign, buffer) { //Finds the average of two values
@@ -223,7 +251,7 @@ let findClosest = new ClosestBall({
 //Meat of the script
 async function mainLoop(startState) {
     var running = true;
-    model = await tf.loadGraphModel('file://model/model.json'); //Load the re-trained COCO RCNN v2 model
+    model = await tf.loadGraphModel('http://127.0.0.1:8080/model.json'); //Load the re-trained COCO RCNN v2 model
     console.log("Connection state at loop begin is " + String(startState));
     //var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
     while (true) { //Loops through this block until the shutdown signal is sent
@@ -241,13 +269,28 @@ async function mainLoop(startState) {
                 });
             });
             try { //Place this inside a try{} block just in case it errors
-                var converted = new Uint8Array(data); //Turn the Node Buffer into an Uint8Array
-                var img_tens = tf.node.decodeJpeg(converted); //Turn the Uint8Array into a 3D Tensor
+                var loadedImage = await new Promise((resolve, reject) => {
+                    var img = new Image();
+                    img.onload = function () {
+                        resolve(img);
+                    };
+                    img.onerror = function (err) {
+                        reject(error);
+                    };
+                    console.log("Creating image object");
+                    img.src = data;
+                });
+                ctx.drawImage(loadedImage, 0, 0);
+                console.log("Drew image onto canvas");
+                var img_tens = tf.browser.fromPixels(canvas);
+                console.log("Created image tensor from canvas");
                 img_tens = img_tens.expandDims(0); //Expand the Tensor along axis zero (to match image dimensions)
                 model_in = {
                     'image_tensor': img_tens
                 }; //Pass in the image
+                console.log("Preparing to execute model")
                 output = await model.executeAsync(model_in, model_out); //And get a response back
+                console.log("Model successfully executed");
                 detection_boxes_raw = await output[0].data(); //Extract raw box values from the detection_boxes tensor
                 detection_boxes_grouped = chunkArray(detection_boxes_raw, 4); //Group the values by detection
                 detection_scores = await output[1].data(); //Extract the score values from the detection_scores tensor
@@ -289,9 +332,9 @@ async function mainLoop(startState) {
                     console.log("blank_count = " + blank_count);
                     if (blank_count > 1) { //We ignore the first blank because the camera glitches sometimes
                         if (blank_count > 15) { //If there's been this many blanks, we need to change tactics
-                            track = track*-1;
+                            track = track * -1;
                         }
-                        if (track > 0) { //Use the last known motion-tracking value to determine where to go
+                        if (track > 0) { //Use the last known motion-tracking valuie to determine where to go
                             console.log("Turn right");
                             client.Assign("right", "/coprocessor/turn");
                         } else if (track < 0) {
@@ -302,6 +345,7 @@ async function mainLoop(startState) {
                 }
             } catch (e) {
                 console.log(e); //Note the error and continue the loop
+                process.exit(-1);
             }
         } catch (rejection) {
             console.log(rejection); //Note any issues with taking the picture
@@ -309,14 +353,16 @@ async function mainLoop(startState) {
     }
 }
 
+var client = {
+    Assign: function (value, key) {
+        console.log("Key = " + key + "\nValue = " + value);
+    }
+};
+
+//mainLoop('yes')
+tf.setBackend('headless-nodegl').then(() => mainLoop("yes"));
+
 /*
-var client = {Assign: function(value, key) {
-    console.log("Key = " + key + "\nValue = " + value);
-}};
-
-mainLoop('yes');
-*/
-
 //Bring up the NetworkTables connection
 client.start((isConnected, err) => {
     if (err) {
@@ -327,6 +373,7 @@ client.start((isConnected, err) => {
         ); //Start actual program loop
     }
 }, ip_address); //Specify IP of NetworkTables server (the roboRIO)
+*/
 
 //Written by Geoffrey C. Stentiford of Team Voltron, FRC #7064
 //https://github.com/geoffreycs/frc-robot-vision-ai

@@ -4,13 +4,26 @@
   "description": "Detects the yellow balls and provides targeting to the roboRIO via NetworkTables",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "node-gpu": "node node-gpu.js",
+    "wasm-test": "node wasm-test.js",
+    "node-gl-test": "node node-gl-test.js",
+    "cpu-vanilla-test": "node cpu-vanilla-test.js",
+    "webgpu-test": "node webgpu-test.js"
   },
   "author": "Geoffrey C Stentiford",
-  "license": "ISC",
+  "license": "BSD-2-Clause",
   "dependencies": {
     "@tensorflow/tfjs-node": "^1.5.2",
     "node-webcam": "^0.5.0",
     "wpilib-nt-client": "^1.7.1"
+  },
+  "devDependencies": {
+    "@tensorflow/tfjs-node-gpu": "^1.5.2",
+    "@types/node": "^13.7.4",
+    "canvas": "^2.6.1",
+    "node-gles": "^0.0.16",
+    "@tensorflow/tfjs": "^1.5.2",
+    "@tensorflow/tfjs-backend-wasm": "^1.5.2-alpha1",
+    "@tensorflow/tfjs-backend-webgpu": "^0.0.1-alpha.0"
   }
 }

@@ -1,7 +1,7 @@
 "use strict"; //Because of course we are
 
 //Change your bot's IP or hostname here
-const ip_address="169.254.106.59"
+//const ip_address="169.254.106.59"
 
 //Set up the webcam
 let NodeCam = require("node-webcam");
@@ -18,7 +18,7 @@ let cam_opts = {
 let Webcam = NodeCam.create(cam_opts);
 
 //Load Tensorflow.JS
-let tf = require('@tensorflow/tfjs-node');
+let tf = require('@tensorflow/tfjs-node-gpu');
 var model;
 
 /*
@@ -309,14 +309,13 @@ async function mainLoop(startState) {
     }
 }
 
-/*
 var client = {Assign: function(value, key) {
     console.log("Key = " + key + "\nValue = " + value);
 }};
 
 mainLoop('yes');
-*/
 
+/*
 //Bring up the NetworkTables connection
 client.start((isConnected, err) => {
     if (err) {
@@ -327,6 +326,7 @@ client.start((isConnected, err) => {
         ); //Start actual program loop
     }
 }, ip_address); //Specify IP of NetworkTables server (the roboRIO)
+*/
 
 //Written by Geoffrey C. Stentiford of Team Voltron, FRC #7064
 //https://github.com/geoffreycs/frc-robot-vision-ai
