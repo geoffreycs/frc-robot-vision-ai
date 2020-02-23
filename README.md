@@ -1,6 +1,6 @@
 # frc-robot-vision-ai
 This is a Node.JS script that tracks the location of yellow balls for FRC Infinite Recharge. It's meant to be run on some sort 
-of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86_64 PC with a desktop CPU like that one team did).   
+of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86_64 PC with a desktop CPU/GPU like that one team did).   
 ## Requirements   
 * Node.js, of course
 * `npm` for installing the dependencies
@@ -15,12 +15,12 @@ of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86
 ## Usage
 1. Clone this repo: `git clone https://github.com/geoffreycs/frc-robot-vision-ai`
 2. (optional) Switch `@tensorflow/tfjs-node` to `@tensorflow/tfjs-node-gpu` in `package.json`
-3. Do `npm install`
+3. Do `npm install` or `yarn install`
 4. Edit `main.js` and set the right robot hostname or IP address in the top of the file
 5. Set up some method to auto-run `node main.js` when needed
 ## Secondary files
 ### Backend test files
-The numerous other `,js` files are mostly identical to `main.js`, but they:
+The numerous other `.js` files are mostly identical to `main.js`, but they:
 * Do not load the NetworkTables client
 * Replace the NetworkTables key-value assign function with a `console.log();`
 * Use different Tensorflow.js backends
