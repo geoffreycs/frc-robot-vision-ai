@@ -21,7 +21,7 @@ of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86
 5. Set up some method to auto-run `node main.js` when needed
 ## Secondary files
 ### `computer-side.js`
-`computer-side.js` is functions much like `main.js`, except it is designed to run on the driver station computer instead. It uses the CPU version of NodeJS by default, although it's a simple change to make it run on the GPU. Instead of using a local webcam, it captures frames from the robot's MJEPG camera stream.
+`computer-side.js` is functions much like `main.js`, except it is designed to run on the driver station computer instead. It uses the CPU version of TensorFlow by default, although it's a simple change to make it run on the GPU. Instead of using a local webcam, it captures frames from the robot's MJEPG camera stream.
 ### Backend test files
 The numerous other `.js` files are mostly identical to `main.js`, but they:
 * Do not load the NetworkTables client
