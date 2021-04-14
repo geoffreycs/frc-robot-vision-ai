@@ -1,0 +1,771 @@
+ INFO: nweb starting:8080:71
+ERROR: system call:bind Errno=98 exiting pid=71
+ INFO: nweb starting:8080:73
+ERROR: system call:bind Errno=98 exiting pid=73
+ INFO: nweb starting:8080:77
+ERROR: system call:bind Errno=98 exiting pid=77
+ INFO: nweb starting:8080:79
+ERROR: system call:bind Errno=98 exiting pid=79
+ INFO: nweb starting:80:81
+ERROR: system call:bind Errno=13 exiting pid=81
+ INFO: nweb starting:1:83
+ERROR: system call:bind Errno=13 exiting pid=83
+ INFO: nweb starting:8080:95
+ERROR: system call:bind Errno=98 exiting pid=95
+ INFO: nweb starting:8080:101
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:1
+ INFO: SEND:model.json:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:1
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:2
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:3
+ INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:4
+ INFO: SEND:group1-shard1of13.bin:2
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:7 INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:5
+
+ INFO: SEND:group1-shard2of13.bin:3
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:6
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:14 INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:12 INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:9
+ INFO: SEND:group1-shard6of13.bin:7
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:10 INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:11
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:3
+
+
+ INFO: SEND:group1-shard3of13.bin:4
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:13
+
+ INFO: SEND:group1-shard12of13.bin:13
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:7
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:4
+ INFO: SEND:group1-shard13of13.bin:14
+ INFO: SEND:group1-shard5of13.bin:6
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:13
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:8
+ INFO: SEND:group1-shard8of13.bin:9 INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:6
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:14
+
+ INFO: SEND:group1-shard4of13.bin:5
+ INFO: SEND:group1-shard9of13.bin:10
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:2
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:5 INFO: SEND:group1-shard11of13.bin:12
+ INFO: SEND:group1-shard10of13.bin:11
+
+ INFO: SEND:group1-shard7of13.bin:8 INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:10 INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:9
+
+
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:11
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:12
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:8
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:15
+ INFO: SEND:model.json:15
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:15
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:16
+ INFO: SEND:group1-shard1of13.bin:16
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:17
+ INFO: SEND:group1-shard2of13.bin:17
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:17
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:16
+ INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:18
+ INFO: SEND:group1-shard3of13.bin:18
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:18
+ INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:19
+ INFO: SEND:group1-shard4of13.bin:19
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:19
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:20
+ INFO: SEND:group1-shard5of13.bin:20
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:20
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:21
+ INFO: SEND:group1-shard6of13.bin:21
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:22
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:21
+ INFO: SEND:group1-shard7of13.bin:22
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:22 INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:23
+
+ INFO: SEND:group1-shard8of13.bin:23
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:24
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:23
+ INFO: SEND:group1-shard9of13.bin:24
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:24
+ INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:25
+ INFO: SEND:group1-shard10of13.bin:25
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:25
+ INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:26
+ INFO: SEND:group1-shard11of13.bin:26
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:27
+ INFO: SEND:group1-shard12of13.bin:27
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:27
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:26
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:28
+ INFO: SEND:group1-shard13of13.bin:28
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:28
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:29
+ INFO: SEND:model.json:29
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:29
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:30
+ INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:32
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:31
+ INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:33 INFO: SEND:group1-shard3of13.bin:32
+
+ INFO: SEND:group1-shard2of13.bin:31
+ INFO: SEND:group1-shard1of13.bin:30 INFO: SEND:group1-shard4of13.bin:33
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:32
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:31
+
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:30
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:33
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:34
+ INFO: SEND:group1-shard5of13.bin:34
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:34
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:35
+ INFO: SEND:group1-shard6of13.bin:35
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:35
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:36
+ INFO: SEND:group1-shard7of13.bin:36
+ INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:37
+ INFO: SEND:group1-shard8of13.bin:37
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:36
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:37
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:38
+ INFO: SEND:group1-shard9of13.bin:38
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:38
+ INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:39
+ INFO: SEND:group1-shard10of13.bin:39
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:39
+ INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:40
+ INFO: SEND:group1-shard11of13.bin:40
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:40
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:41
+ INFO: SEND:group1-shard12of13.bin:41
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:41
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:42
+ INFO: SEND:group1-shard13of13.bin:42
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:42
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:43
+ INFO: SEND:model.json:43
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:43
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:44
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:45 INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:46
+
+ INFO: SEND:group1-shard2of13.bin:45
+ INFO: SEND:group1-shard3of13.bin:46 INFO: SEND:group1-shard1of13.bin:44
+
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:45
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:46
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:44
+ INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:47
+ INFO: SEND:group1-shard4of13.bin:47
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:47
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:48
+ INFO: SEND:group1-shard5of13.bin:48
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:49
+ INFO: SEND:group1-shard6of13.bin:49
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:49
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:48
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:50
+ INFO: SEND:group1-shard7of13.bin:50
+ INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:51
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:50
+ INFO: SEND:group1-shard8of13.bin:51
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:51
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:52
+ INFO: SEND:group1-shard9of13.bin:52
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:52
+ INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:53
+ INFO: SEND:group1-shard10of13.bin:53
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:53
+ INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:54
+ INFO: SEND:group1-shard11of13.bin:54
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:54
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:55
+ INFO: SEND:group1-shard12of13.bin:55
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:56
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:55
+ INFO: SEND:group1-shard13of13.bin:56
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:56
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:57
+ INFO: SEND:model.json:57
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:57
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:58
+ INFO: SEND:group1-shard1of13.bin:58
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:59
+ INFO: SEND:group1-shard2of13.bin:59 INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:58
+
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:59
+ INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:60
+ INFO: SEND:group1-shard3of13.bin:60
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:60
+ INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:61
+ INFO: SEND:group1-shard4of13.bin:61
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:61
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:62
+ INFO: SEND:group1-shard5of13.bin:62
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:63
+ INFO: SEND:group1-shard6of13.bin:63
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:62
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:63
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:64
+ INFO: SEND:group1-shard7of13.bin:64
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:64
+ INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:65
+ INFO: SEND:group1-shard8of13.bin:65
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:65
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:66
+ INFO: SEND:group1-shard9of13.bin:66
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:66
+ INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:67
+ INFO: SEND:group1-shard10of13.bin:67
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:67
+ INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:68
+ INFO: SEND:group1-shard11of13.bin:68
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:69
+ INFO: SEND:group1-shard12of13.bin:69
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:68
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:69
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:70
+ INFO: SEND:group1-shard13of13.bin:70
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:70
+ INFO: request:GET /model.json HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:71
+ INFO: SEND:model.json:71
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 908081
+Connection: close
+Content-Type: application/json
+
+:71
+ INFO: request:GET /group1-shard1of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:72
+ INFO: SEND:group1-shard1of13.bin:72
+ INFO: request:GET /group1-shard2of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:73
+ INFO: SEND:group1-shard2of13.bin:73
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:72
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:73
+ INFO: request:GET /group1-shard3of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:74
+ INFO: SEND:group1-shard3of13.bin:74
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:74
+ INFO: request:GET /group1-shard4of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:75
+ INFO: SEND:group1-shard4of13.bin:75
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:75
+ INFO: request:GET /group1-shard5of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:76
+ INFO: SEND:group1-shard5of13.bin:76
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:76
+ INFO: request:GET /group1-shard6of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:77
+ INFO: SEND:group1-shard6of13.bin:77
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:77
+ INFO: request:GET /group1-shard7of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:78
+ INFO: SEND:group1-shard7of13.bin:78
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:78
+ INFO: request:GET /group1-shard8of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:79
+ INFO: SEND:group1-shard8of13.bin:79
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:79
+ INFO: request:GET /group1-shard9of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:80
+ INFO: SEND:group1-shard9of13.bin:80
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:80
+ INFO: request:GET /group1-shard10of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:81
+ INFO: SEND:group1-shard10of13.bin:81
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:81
+ INFO: request:GET /group1-shard11of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:82
+ INFO: SEND:group1-shard11of13.bin:82
+ INFO: request:GET /group1-shard12of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:83
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:82
+ INFO: SEND:group1-shard12of13.bin:83
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 4194304
+Connection: close
+Content-Type: application/octet-stream
+
+:83
+ INFO: request:GET /group1-shard13of13.bin HTTP/1.1**Accept: */***User-Agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)**Accept-Encoding: gzip,deflate**Connection: close**Host: 127.0.0.1:8080****:84
+ INFO: SEND:group1-shard13of13.bin:84
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/23.0
+Content-Length: 1073624
+Connection: close
+Content-Type: application/octet-stream
+
+:84

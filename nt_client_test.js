@@ -2,6 +2,10 @@
 const ntClient = require('wpilib-nt-client');
 const client = new ntClient.Client();
 
+//Parse IP address from command line arguments
+const commandLineArgs = require('command-line-args');
+const options = commandLineArgs([{ name: 'address', alias: 'a', type: String, defaultOption: true, defaultValue: '10.70.64.2' }]);
+
 //Bring up the NetworkTables connection
 client.start((isConnected, err) => {
     if (err) {
@@ -15,4 +19,4 @@ client.start((isConnected, err) => {
             process.exit(0);
         }, 3000);
     }
-}, "10.70.64.2");
+}, options.address);

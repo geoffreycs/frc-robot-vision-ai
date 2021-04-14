@@ -4,34 +4,46 @@ of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86
 ## Requirements   
 * Node.js, of course
 * `npm` for installing the dependencies
-* `fswebcam` for taking pictures via `node-webcam`
 * `mjpeg-decoder` for capturing images from the robot's MJPEG camera stream (used in `computer-side.js`)
-* A CPU capable of running TensorFlow.js models with some level of performance
-  * If you're running this (for some reason) on a Linux system with a CUDA-capable GPU, you can switch out the `@tensorflow/tfjs-node`
-  with `@tensorflow/tfjs-node-gpu` in `package.json`. In that case, you'll also need to install/configure CUDA support
-* A writable (but not necessarily non-volatile) filesystem for the program to run on
-  * An image is continuously saved to `image.jpg` in the root folder. I recommend using the `overlay` filesystem, with the actual 
-  root directory being read-only and any changes being stored in RAM.
-* A roboRIO configured to use this coprocessor script   
+* A CPU or Nvidia GPU capable of running TensorFlow.js models with some level of performance
+* An FRC robot with a webam configured to be of sufficient resolution aimed in front or behind the robot and in view of the floor
+* Code on the robot written to make use of this program's output
+## Webcam
+On our robot, we set the camera to 640x360 for the FRC 2021 season. It only got seven frames per second, however, the neural network is the bottleneck, so that wasn't an issue. If you have a fast enough computer, then the low framerate may become an issue. However, if the resolution is too low, then the network fails to recognize any balls. You must specify the same camera resolution in both the the robot code and the command line paramters for this program.
 ## Usage
 1. Clone this repo: `git clone https://github.com/geoffreycs/frc-robot-vision-ai`
 2. (optional) Switch `@tensorflow/tfjs-node` to `@tensorflow/tfjs-node-gpu` in `package.json`
 3. Do `npm install` or `yarn install`
-4. Edit `main.js` and set the right robot hostname or IP address in the top of the file
-5. Set up some method to auto-run `node main.js` when needed
-## Secondary files
-### `computer-side.js`
-`computer-side.js` is functions much like `main.js`, except it is designed to run on the driver station computer instead. It uses the CPU version of TensorFlow by default, although it's a simple change to make it run on the GPU. Instead of using a local webcam, it captures frames from the robot's MJEPG camera stream.
-### Backend test files
-The numerous other `.js` files are mostly identical to `main.js`, but they:
-* Do not load the NetworkTables client
-* Replace the NetworkTables key-value assign function with a `console.log();`
-* Use different Tensorflow.js backends
-* Require `devDependencies` to be installed
-* Generally do not work besides `node-gpu.js` (which uses the native CUDA backend and so will generally not be usable on a robot-mounted coprocessor) and `cpu-vanilla-test.js` (which uses the pure JavaScript backend and so is more compatible but absurdly slow
-* (Excludes `node-gpu.js`) Require an HTTP server running at `127.0.0.1:8080` and serving the `model` directory aa the webserver root (a modified `nweb` is provided as both source and x86_64 Linux ELF binary for this purpose)
-* (Excludes `node-gpu.js`) Take the image as a PNG as part of a workaround to build an image tensor without `tf.node.decodeJpeg()`, which isn't present in `@tensorflow/tfjs`.
-### `nt_client_test.js`
-Simple script to toggle a value on NetworkTables at `/testtable/testkey` to test the NetworkTables setup.
-### nweb
-Needed to run all backend tests besides `node-gpu.js`. The compiled binary is an x86_64 ELF for Linux. It is dynamically linked, but will run on most common setups. You can recompile if needed with `gcc -O -DLINUX nweb23.c -o nweb`. Run using `.nweb 8080 ./model`. This version is slightly modified to also serve the model's `.bin` files with the `application/octet-stream` MIME type.
+4. Turn on the robot and connect the device running this program to the robot
+5. Start the program with `node main.js [IP address of robot] -w [image_width] -h [image_height]`
+## Syntax
+```
+npm start -- [--address] IP_address [--width webcam_width] [--height webcam_height]
+```
+Example: `npm start -- 10.70.64.2 -w 640 -h 360`.
+
+If no parameters are specified, then the program defaults to the values in the example above. No, those probably won't be useful for you (because you're likely not Team #7064), but they were quite useful for us.
+## API
+The program reads and writes to a fixed set of NetworkTable keys.
+It reads the URL of the camera stream from `/CameraPublisher/USB Camera 0/streams`, so the camera to be used must be published via the normal WPILib camera server. Every loop iteration, the following keys are written to:
+* `/coprocessor/turn` - Integer indicating which direction to turn, with -1 being left, 1 being right, and 0 being straight ahead
+* `/coprocessor/certainty` - Double holding the percentage certainty of the detection, or zero if the ball is not within the field of view
+* `/coprocessor/radius` - Double with the apparent radius (in pixels) of the closest ball, or zero if the ball is not within the field of view
+* `/coprocessor/guessing` - Boolean indicating whether the program is relying on the previously tracked motion of the ball (i.e if the ball is not in view)
+* `/coprocessor/hits` - Integer count of consecutive loop iterations that the program has detected a ball
+* /coproessor/blanks` - Integer count of consecutive loop iterations that the program has failed to detect a ball
+## Program behavior
+On startup, the program first connects to the NetworkTables server at the specified IP address. Next, it reads and then stores the camera stream URL, and also loads the TensorFlow model. It then begins looping though the following process:
+1. Capture the current frame from the stream URL
+2. Convert the image to a tensor
+3. Pass the tensor to TensorFlow and run the model on it
+4. Parse the resulting output and filter out all detections below 60% certainty (and if none are found, skip to step 10)
+6. Calculate the radii of each filtered detection
+7. Store the index of the detection with the largest radii
+8. Determine whether the ball is to the left or right of a zone around the center of the image
+9. Compare the X-position of the detection with the X-position of the previous iteration's detection in order to determine whether the ball is moving left or right relative to the camera, and store the resulting motion tracking value (and skip to step 12) 
+10. If there has been no previous loop iteration yet, randomly assign left or right to the motion tracking value
+11. If no balls were found, check the motion tracking value to determine whether to turn left or right
+12. Push all the values to NetworkTables
+## `nt_client_test.js`
+Simple script to toggle a value on NetworkTables at `/testtable/testkey` to test the NetworkTables setup. Run with `node nt_client_test.js {IP_address}`.

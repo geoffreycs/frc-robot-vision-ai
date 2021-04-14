@@ -1,25 +1,30 @@
 "use strict"; //Because of course we are
 
-//Change your bot's IP or hostname here
-const ip_address="169.254.106.59"
+//Define command line options
+const optionDefinitions = [
+    { name: 'address', alias: 'a', type: String, defaultOption: true, defaultValue: '10.70.64.2' },
+    { name: 'width', alias: 'w', type: Number, defaultValue: 640 },
+    { name: 'height', alias: 'h', type: Number, defaultValue: 360 }
+];
 
-//Set up the webcam
-let NodeCam = require("node-webcam");
+//Parse options
+const commandLineArgs = require('command-line-args');
+const options = commandLineArgs(optionDefinitions);
+
+//Change your bot's IP or hostname here
+const ip_address = options.address;
+console.info("IP address is " + ip_address);
+
+//Set up MJpeg capture
+const MjpegDecoder = require('mjpeg-decoder');
 let cam_opts = {
-    width: 640, //Low resolution so image is small and program is light
-    height: 480,
-    quality: 70, //Neural network doesn't need that great of a pciture
-    saveShots: false, //No need to waste memory by saving
-    output: "jpeg", //Format must be JPEG
-    device: false, //Use default (only) camera
-    callbackReturn: "buffer", //Return as a buffer so we can work with it immediately
-    verbose: true //More logging is better
+    width: options.width, //Put in the given image resolution
+    height: options.height
 };
-let Webcam = NodeCam.create(cam_opts);
+console.info("Expecting image of size " + String(cam_opts.width) + "x" + String(cam_opts.height));
 
 //Load Tensorflow.JS
-let tf = require('@tensorflow/tfjs-node');
-tf.enableProdMode();
+let tf = require('@tensorflow/tfjs-node-gpu');
 var model;
 
 //Load the NetworkTables client
@@ -42,8 +47,10 @@ var cartesian_converted = new Array();
 var closest = 0 | 0;
 var last_X = null;
 var track = 0 | 0;
-var blank_count = 0;
+var blank_count = 0 | 0;
+var hit_count = 0 | 0;
 var closest_X = 0.0;
+var detected_once = false;
 
 //Compile some asm.js modules for even more speed
 function CenterPoint(stdlib, foreign, buffer) { //Finds the average of two values
@@ -112,12 +119,13 @@ function ArrayChunk() { //Breaks arrays up into sub-arrays of equal size
 }
 let chunkArray = new ArrayChunk();
 
-function DetectionFilter() { //Filters out all detections not above 0.5 certainty
+function DetectionFilter() { //Filters out all detections not above 0.6 certainty
     function filterDetections(scores) {
         var filtered = new Array();
         scores.forEach((item, index) => {
             item = +item;
-            if ((+item) > 0.5) {
+            if ((+item) > 0.6) {
+                console.log("Adding index " + String(index))
                 filtered.push(index);
             }
         });
@@ -221,24 +229,18 @@ let findClosest = new ClosestBall({
 
 //Meat of the script
 async function mainLoop(startState) {
-    //var running = true;
+    var running = true;
     model = await tf.loadGraphModel('file://model/model.json'); //Load the re-trained COCO RCNN v2 model
     console.log("Connection state at loop begin is " + String(startState));
+    var MjpegStream = client.getEntry(client.getKeyID("/CameraPublisher/USB Camera 0/streams")).val[1].substring(5); //Get the camera stream's URL
+    var decoder;
     //var keyID = Number(client.getKeyID("/coprocessor/shutdown")); //Grab the NetworkTables ID of the shutdown key
-    while (true) { //Loops through this block until the shutdown signal is sent
+    while (true) { //Loops through this block
+        tf.engine().startScope(); //Use a scope so memory is freed back up after every cycle
+        console.log("\n");
         try {
-            /* if (client.getEntry(keyID) == true) { //Listen for when that shutdown entry switches to true
-                running = false; //And disable the loop so the function finally exits
-            } */
-            data = await new Promise((resolve, reject) => {
-                Webcam.capture("image", function (err, data) { //Take the picture
-                    if (err) { //Note an error if it occurs
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
-                });
-            });
+            decoder = new MjpegDecoder(MjpegStream, { maxFrames: 1 });
+            data = await decoder.takeSnapshot(); //Take a frame from the camera stream
             try { //Place this inside a try{} block just in case it errors
                 var converted = new Uint8Array(data); //Turn the Node Buffer into an Uint8Array
                 var img_tens = tf.node.decodeJpeg(converted); //Turn the Uint8Array into a 3D Tensor
@@ -252,20 +254,28 @@ async function mainLoop(startState) {
                 detection_scores = await output[1].data(); //Extract the score values from the detection_scores tensor
                 filtered_detections = filterDetections(detection_scores); //Filter out the many, many false positives
                 if (filtered_detections.length > 0) { //We can skip this block if no balls were detected
-                    blank_count = 0; //Reset the counter of how many iterations we failed to detect any balls
+                    blank_count = 0 | 0; //Reset the counter of how many iterations we failed to detect any balls
+                    hit_count = hit_count + 1; //Increment the counter how many interactions we did find a ball
+                    detected_once = true; //Trigger the fuse to show that we have detected at least once so far
+                    console.log("hit_count = " + String(hit_count));
                     merged_boxes = mergeDetected(filtered_detections, detection_boxes_grouped); //Rearrange the data into this handier format
                     cartesian_converted = toCartesian(merged_boxes); //Recenter the X-values so that 0 is the middle of the image
                     closest = findClosest(cartesian_converted); //Find the closest ball based on its radius in the image
                     console.log("Closest ball is at index " + String(closest));
                     closest_X = cartesian_converted[closest].X; //Grab the X-axis value of this ball's centerpoint
-                    if (closest_X > 75) { //Turn right if it's on the right of the picture
+                    console.log("Certainty of closest detection is " + String(detection_scores[closest].toFixed(4) * 100) + "%");
+                    client.Assign(detection_scores[closest].toFixed(4) * 100, "/coprocessor/certainty"); //Push the certainty to NetworkTables
+                    console.log("Radius of closest detection is " + String(cartesian_converted[closest].r));
+                    client.Assign(cartesian_converted[closest].r, "/coprocessor/radius"); //Push the ball's relative size to NetworkTables
+                    client.Assign(false, "/coprocessor/guessing"); //Indicate to the bot that the ball is being actively tracked
+                    if (closest_X > 25) { //Turn right if it's on the right of the picture
                         console.log("Turn right");
-                        client.Assign("right", "/coprocessor/turn");
-                    } else if (closest_X < -75) {
+                        client.Assign(1.0, "/coprocessor/turn");
+                    } else if (closest_X < -25) {
                         console.log("Turn left"); //Ditto but for left
-                        client.Assign("left", "/coprocessor/turn");
+                        client.Assign(-1.0, "/coprocessor/turn");
                     } else {
-                        client.Assign("ahead", "/coprocessor/turn"); //Or just go forwards if it's roughly centered
+                        client.Assign(0.0, "/coprocessor/turn"); //Or just go forwards if it's roughly centered
                         console.log("Ahead");
                     }
                     console.log("last_X = " + String(last_X));
@@ -281,51 +291,60 @@ async function mainLoop(startState) {
                         //}
                     }
                     last_X = closest_X; //Update this now old value
-                } else {
+                } else { //Or if we can't find a ball...
                     console.log("0 detections");
-                    console.log("track = " + String(track));
-                    blank_count = blank_count + 1; //Increment this counter
-                    console.log("blank_count = " + blank_count);
-                    if (blank_count > 1) { //We ignore the first blank because the camera glitches sometimes
-                        if (blank_count > 15) { //If there's been this many blanks, we need to change tactics
-                            track = track*-1;
-                        }
-                        if (track > 0) { //Use the last known motion-tracking value to determine where to go
-                            console.log("Turn right");
-                            client.Assign("right", "/coprocessor/turn");
-                        } else if (track < 0) {
-                            console.log("Turn left");
-                            client.Assign("left", "/coprocessor/turn");
+                    if (detected_once == false && blank_count == 0) { //Check if we've gotten even a single detection so far
+                        if ((Math.random() - 0.5) > 0) { //Then give a random motion tracking value so the bot doesn't just sit there
+                            track = 1;
+                        } else {
+                            track = -1;
                         }
                     }
+                    console.log("track = " + String(track));
+                    blank_count = blank_count + 1; //Increment this counter
+                    hit_count = 0 | 0;
+                    console.log("blank_count = " + String(blank_count));
+                    client.Assign(0, "/coprocessor/certainty"); //Set the certainty key to zero because we lost the ball
+                    client.Assign(true, "/coprocessor/guessing"); //Let the bot know that the AI ain't seein' sHIT
+                    client.Assign(0.0, "/coprocessor/radius");
+                    if (blank_count == 40) { //If there's been this many blanks, we need to reverse direction
+                        track = track * -1;
+                        console.log("Reversing due to 40 consecutive blanks");
+                    }
+                    if (track > 0) { //Use the last known motion-tracking value to determine where to go
+                        console.log("Turn right");
+                        client.Assign(1.0, "/coprocessor/turn");
+                    } else if (track < 0) {
+                        console.log("Turn left");
+                        client.Assign(-1.0, "/coprocessor/turn");
+                    }
                 }
+                client.Assign(blank_count, "/coprocessor/blanks"); //Push these counters to the NetworkTable
+                client.Assign(hit_count, "/coprocessor/hits");
             } catch (e) {
-                console.log(e); //Note the error and continue the loop
+                console.error(e); //Note the error and continue the loop
+                //throw e;
             }
         } catch (rejection) {
-            console.log(rejection); //Note any issues with taking the picture
+            //console.log(rejection); //Note any issues with taking the picture
+            throw rejection;
         }
+        tf.engine().endScope();
     }
 }
-
-/*
-var client = {Assign: function(value, key) {
-    console.log("Key = " + key + "\nValue = " + value);
-}};
-
-mainLoop('yes');
-*/
 
 //Bring up the NetworkTables connection
 client.start((isConnected, err) => {
     if (err) {
         throw err; //Abort if there is an issue
     } else {
+        //MjpegStream = "http://10.70.64.2:1181/?action=stream"
         mainLoop(isConnected).then(
             () => process.exit(0) //Be ready to shutdown the program when we get the signal
         ); //Start actual program loop
     }
 }, ip_address); //Specify IP of NetworkTables server (the roboRIO)
 
+
 //Written by Geoffrey C. Stentiford of Team Voltron, FRC #7064
-//https://github.com/geoffreycs/frc-robot-vision-ai
+//https://github.com/geoffreycs/frc-robot-vision-
