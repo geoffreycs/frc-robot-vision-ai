@@ -31,7 +31,7 @@ It reads the URL of the camera stream from `/CameraPublisher/USB Camera 0/stream
 * `/coprocessor/radius` - Double with the apparent radius (in pixels) of the closest ball, or zero if the ball is not within the field of view
 * `/coprocessor/guessing` - Boolean indicating whether the program is relying on the previously tracked motion of the ball (i.e if the ball is not in view)
 * `/coprocessor/hits` - Integer count of consecutive loop iterations that the program has detected a ball
-* /coproessor/blanks` - Integer count of consecutive loop iterations that the program has failed to detect a ball
+* `/coproessor/blanks` - Integer count of consecutive loop iterations that the program has failed to detect a ball
 ## Program behavior
 On startup, the program first connects to the NetworkTables server at the specified IP address. Next, it reads and then stores the camera stream URL, and also loads the TensorFlow model. It then begins looping though the following process:
 1. Capture the current frame from the stream URL
