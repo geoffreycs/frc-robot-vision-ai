@@ -4,7 +4,6 @@ of coprocessor device, such as a Jetson or a Raspberry Pi (or a full-fledged x86
 ## Requirements   
 * Node.js, of course
 * `npm` for installing the dependencies
-* `mjpeg-decoder` for capturing images from the robot's MJPEG camera stream (used in `computer-side.js`)
 * A CPU or Nvidia GPU capable of running TensorFlow.js models with some level of performance
 * An FRC robot with a webam configured to be of sufficient resolution aimed in front or behind the robot and in view of the floor
 * Code on the robot written to make use of this program's output
